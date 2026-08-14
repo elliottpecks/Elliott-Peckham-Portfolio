@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Elliott Peckham | Portfolio</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<header class="site-header">
+    <a href="index.html" class="logo">ELLIOTT PECKHAM</a>
+    <nav class="main-nav">
+      <a href="index.html">Home</a>
+      <a href="football.html">Football</a>
+      <a href="hockey.html">Hockey</a>
+      <a href="lacrosse.html">Lacrosse</a>
+      <a href="baseball.html">Baseball</a>
+      <a href="design.html">Graphic Design</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+  </header>
+
+  <main class="slider-container">
+    <button class="prev-btn" onclick="prevSlide()">&#10094;</button>
+
+    <div class="slide active"><img src="images/photo1.JPG" alt="Home Shot 1" onclick="openLightbox(this.src)"></div>
+    <div class="slide"><img src="images/photo2.JPG" alt="Home Shot 2" onclick="openLightbox(this.src)"></div>
+    <div class="slide"><img src="images/photo3.JPG" alt="Home Shot 3" onclick="openLightbox(this.src)"></div>
+    <div class="slide"><img src="images/photo4.JPG" alt="Home Shot 4" onclick="openLightbox(this.src)"></div>
+    <div class="slide"><img src="images/photo5.JPG" alt="Home Shot 5" onclick="openLightbox(this.src)"></div>
+    <div class="slide"><img src="images/photo6.JPG" alt="Home Shot 6" onclick="openLightbox(this.src)"></div>
+    <div class="slide"><img src="images/photo7.JPG" alt="Home Shot 7" onclick="openLightbox(this.src)"></div>
+    <div class="slide"><img src="images/photo8.JPG" alt="Home Shot 8" onclick="openLightbox(this.src)"></div>
+
+    <button class="next-btn" onclick="nextSlide()">&#10095;</button>
+  </main>
+
+  <div id="lightbox" class="lightbox" onclick="closeLightbox()">
+    <span class="lightbox-close">&times;</span>
+    <img id="lightbox-img" src="" alt="Fullscreen View">
+  </div>
+
+  <footer class="site-footer">
+    <p>All images © Elliott Peckham</p>
+  </footer>
+
+  <script>
+    let currentSlide = 0;
+    const slides = document.querySelectorAll('.slide');
+
+    function showSlide(nextIndex, direction) {
+      if (nextIndex >= slides.length) nextIndex = 0;
+      if (nextIndex < 0) nextIndex = slides.length - 1;
+
+      slides.forEach(slide => {
+        slide.className = 'slide';
+      });
+
+      if (direction === 'next') {
+        slides[currentSlide].classList.add('exit-left');
+      }
+      
+      currentSlide = nextIndex;
+      slides[currentSlide].classList.add('active');
+    }
+
+    function nextSlide() { showSlide(currentSlide + 1, 'next'); }
+    function prevSlide() { showSlide(currentSlide - 1, 'prev'); }
+
+    function openLightbox(src) {
+      document.getElementById('lightbox-img').src = src;
+      document.getElementById('lightbox').style.display = 'flex';
+    }
+
+    function closeLightbox() {
+      document.getElementById('lightbox').style.display = 'none';
+    }
+  </script>
+
+</body>
+</html>

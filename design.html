@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Graphic Design | Elliott Peckham</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<header class="site-header">
+    <a href="index.html" class="logo">ELLIOTT PECKHAM</a>
+    <nav class="main-nav">
+      <a href="index.html">Home</a>
+      <a href="football.html">Football</a>
+      <a href="hockey.html">Hockey</a>
+      <a href="lacrosse.html">Lacrosse</a>
+      <a href="baseball.html">Baseball</a>
+      <a href="design.html">Graphic Design</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+  </header>
+
+  <main class="gallery-grid" id="design-grid"></main>
+
+  <div id="lightbox" class="lightbox" onclick="closeLightbox()">
+    <span class="lightbox-close">&times;</span>
+    <img id="lightbox-img" src="" alt="Fullscreen View">
+  </div>
+
+  <footer class="site-footer">
+    <p>All images © Elliott Peckham</p>
+  </footer>
+
+  <script>
+    const grid = document.getElementById('design-grid');
+    
+    // Set this number to how many design images you have in your images folder
+    const totalDesigns = 12; 
+
+    for (let i = 1; i <= totalDesigns; i++) {
+      const item = document.createElement('div');
+      item.className = 'grid-item';
+      item.innerHTML = `<img src="images/design${i}.jpg" alt="Design ${i}" onclick="openLightbox(this.src)">`;
+      grid.appendChild(item);
+    }
+
+    function openLightbox(src) {
+      document.getElementById('lightbox-img').src = src;
+      document.getElementById('lightbox').style.display = 'flex';
+    }
+
+    function closeLightbox() {
+      document.getElementById('lightbox').style.display = 'none';
+    }
+  </script>
+
+</body>
+</html>
