@@ -11,13 +11,26 @@
 <header class="site-header">
     <a href="index.html" class="logo">ELLIOTT PECKHAM</a>
     <nav class="main-nav">
-      <a href="index.html">Home</a>
-      <a href="football.html">Football</a>
-      <a href="hockey.html">Hockey</a>
-      <a href="lacrosse.html">Lacrosse</a>
-      <a href="baseball.html">Baseball</a>
-      <a href="design.html">Graphic Design</a>
-      <a href="contact.html">Contact</a>
+      <div class="desktop-nav">
+        <a href="index.html">Home</a>
+        <a href="football.html">Football</a>
+        <a href="hockey.html">Hockey</a>
+        <a href="lacrosse.html">Lacrosse</a>
+        <a href="baseball.html" class="active">Baseball</a>
+        <a href="design.html">Graphic Design</a>
+        <a href="contact.html">Contact</a>
+      </div>
+
+      <select class="mobile-nav" onchange="window.location.href=this.value;">
+        <option value="" disabled selected>Menu...</option>
+        <option value="index.html">Home</option>
+        <option value="football.html">Football</option>
+        <option value="hockey.html">Hockey</option>
+        <option value="lacrosse.html">Lacrosse</option>
+        <option value="baseball.html">Baseball</option>
+        <option value="design.html">Graphic Design</option>
+        <option value="contact.html">Contact</option>
+      </select>
     </nav>
   </header>
 

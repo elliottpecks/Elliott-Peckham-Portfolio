@@ -35,7 +35,7 @@ body {
 }
 
 /* Nav links styled like logo */
-.main-nav a {
+.desktop-nav a {
   margin-left: 20px;
   text-decoration: none;
   color: #000000;
@@ -47,8 +47,8 @@ body {
   display: inline-block;
 }
 
-.main-nav a:hover,
-.main-nav a.active {
+.desktop-nav a:hover,
+.desktop-nav a.active {
   font-size: 0.95rem;
   font-weight: 500;
   transform: scale(1.08);
@@ -188,7 +188,12 @@ body {
   margin-top: 30px;
 }
 
-/* Mobile Adjustments */
+/* Hide mobile dropdown menu by default on desktop screens */
+.mobile-nav {
+  display: none;
+}
+
+/* Tablet Adjustments (Under 900px) */
 @media (max-width: 900px) {
   .site-header {
     flex-direction: column;
@@ -196,11 +201,6 @@ body {
     align-items: flex-start;
   }
   
-  .main-nav a {
-    margin-left: 0;
-    margin-right: 15px;
-  }
-
   .gallery-grid {
     column-count: 2;
   }
@@ -210,6 +210,34 @@ body {
   }
 }
 
+/* Mobile Adjustments (Under 768px) */
+@media (max-width: 768px) {
+  /* Toggle Nav: Hide desktop links, show select dropdown */
+  .desktop-nav {
+    display: none;
+  }
+
+  .mobile-nav {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    background-color: #ffffff;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+  }
+
+  /* Shrink slider & lightbox arrow buttons so they don't block photos */
+  .prev-btn, .next-btn {
+    font-size: 16px;
+    padding: 8px 12px;
+    background-color: rgba(0, 0, 0, 0.5);
+    color: #ffffff;
+    border-radius: 4px;
+  }
+}
+
+/* Small Phone Adjustments (Under 600px) */
 @media (max-width: 600px) {
   .gallery-grid {
     column-count: 1;
