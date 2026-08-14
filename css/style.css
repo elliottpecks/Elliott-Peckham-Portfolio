@@ -21,8 +21,9 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  z-index: 10;
+  z-index: 100;
   margin-bottom: 30px;
+  position: relative;
 }
 
 .logo {
@@ -49,22 +50,43 @@ body {
 
 .desktop-nav a:hover,
 .desktop-nav a.active {
-  font-size: 0.95rem;
-  font-weight: 500;
-  transform: scale(1.08);
+  font-size: 0.85rem;
+  font-weight: 600;
+  transform: scale(1.05);
 }
 
-/* Larger Homepage Slider with Smooth Transitions */
+/* Mobile Hamburger Button */
+.menu-toggle {
+  display: none;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 28px;
+  height: 18px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  z-index: 101;
+}
+
+.menu-toggle span {
+  width: 100%;
+  height: 2px;
+  background-color: #000000;
+  transition: all 0.3s ease;
+}
+
+/* Homepage Slider */
 .slider-container {
   position: relative;
   width: 100%;
   max-width: 1400px;
-  height: 80vh;
+  height: 75vh;
   margin: 10px auto;
   display: flex;
   align-items: center;
   justify-content: center;
   overflow: hidden;
+  touch-action: pan-y;
 }
 
 .slide {
@@ -73,27 +95,30 @@ body {
   height: 100%;
   opacity: 0;
   transform: translateX(100%);
-  transition: transform 0.5s ease-in-out, opacity 0.5s ease-in-out;
+  transition: transform 0.4s ease-in-out, opacity 0.4s ease-in-out;
   display: flex;
   justify-content: center;
   align-items: center;
+  pointer-events: none;
 }
 
 .slide.active {
   opacity: 1;
   transform: translateX(0);
+  pointer-events: auto;
 }
 
 .slide.exit-left {
   opacity: 0;
   transform: translateX(-100%);
+  pointer-events: none;
 }
 
 .slide img {
   max-width: 100%;
   max-height: 100%;
   object-fit: contain;
-  cursor: pointer;
+  user-select: none;
 }
 
 /* Slider Controls */
@@ -101,13 +126,14 @@ body {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  background: rgba(255, 255, 255, 0.7);
-  border: none;
-  font-size: 2rem;
-  padding: 12px 20px;
+  background: rgba(255, 255, 255, 0.8);
+  color: #000;
+  border: 1px solid #eee;
+  font-size: 1.5rem;
+  padding: 12px 18px;
   cursor: pointer;
   z-index: 5;
-  transition: background 0.2s ease;
+  transition: all 0.2s ease;
 }
 
 .prev-btn:hover, .next-btn:hover {
@@ -118,7 +144,7 @@ body {
 .prev-btn { left: 10px; }
 .next-btn { right: 10px; }
 
-/* Uncropped Masonry Grid for Sport Pages */
+/* Gallery Grid for Sport Pages */
 .gallery-grid {
   column-count: 3;
   column-gap: 20px;
@@ -136,15 +162,14 @@ body {
 
 .grid-item img {
   width: 100%;
-  height: auto; /* Full uncropped image aspect ratio */
+  height: auto;
   display: block;
   cursor: pointer;
   transition: transform 0.3s ease, opacity 0.2s ease;
 }
 
-/* Hover Zoom Effect */
 .grid-item img:hover {
-  transform: scale(1.03); /* Subtle expand on hover */
+  transform: scale(1.02);
   opacity: 0.95;
 }
 
@@ -188,58 +213,74 @@ body {
   margin-top: 30px;
 }
 
-/* Hide mobile dropdown menu by default on desktop screens */
-.mobile-nav {
-  display: none;
-}
-
-/* Tablet Adjustments (Under 900px) */
+/* Responsive Rules */
 @media (max-width: 900px) {
-  .site-header {
-    flex-direction: column;
-    gap: 15px;
-    align-items: flex-start;
-  }
-  
   .gallery-grid {
     column-count: 2;
   }
+}
+
+@media (max-width: 768px) {
+  body {
+    padding: 20px 5%;
+  }
+
+  .site-header {
+    margin-bottom: 20px;
+  }
+
+  .menu-toggle {
+    display: flex;
+  }
+
+  /* Clean Mobile Slide-Out Menu matching site font/style */
+  .desktop-nav {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 25px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background-color: #ffffff;
+    z-index: 100;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+  }
+
+  .desktop-nav.active {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .desktop-nav a {
+    margin-left: 0;
+    font-size: 1.1rem;
+    letter-spacing: 5px;
+  }
 
   .slider-container {
-    height: 60vh;
-  }
-}
-
-/* Mobile Adjustments (Under 768px) */
-@media (max-width: 768px) {
-  /* Toggle Nav: Hide desktop links, show select dropdown */
-  .desktop-nav {
-    display: none;
+    height: 55vh;
   }
 
-  .mobile-nav {
-    display: block;
-    width: 100%;
-    padding: 10px;
-    font-size: 16px;
-    background-color: #ffffff;
-    border: 1px solid #ccc;
-    border-radius: 6px;
-  }
-
-  /* Shrink slider & lightbox arrow buttons so they don't block photos */
   .prev-btn, .next-btn {
-    font-size: 16px;
+    font-size: 1.2rem;
     padding: 8px 12px;
-    background-color: rgba(0, 0, 0, 0.5);
-    color: #ffffff;
-    border-radius: 4px;
+    background: rgba(255, 255, 255, 0.9);
   }
 }
 
-/* Small Phone Adjustments (Under 600px) */
 @media (max-width: 600px) {
   .gallery-grid {
     column-count: 1;
+  }
+  
+  .logo {
+    font-size: 1.1rem;
+    letter-spacing: 4px;
   }
 }

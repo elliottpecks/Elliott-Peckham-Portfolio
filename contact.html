@@ -6,7 +6,6 @@
   <title>Contact | Elliott Peckham</title>
   <link rel="stylesheet" href="css/style.css">
   <style>
-    /* Contact Page Layout */
     .contact-container {
       max-width: 800px;
       margin: 60px auto;
@@ -72,24 +71,40 @@
 </head>
 <body>
 
-<header class="site-header">
+  <header class="site-header">
     <a href="index.html" class="logo">ELLIOTT PECKHAM</a>
-    <nav class="main-nav">
-      <div class="desktop-nav">
-        <a href="index.html">Home</a>
-        <a href="football.html">Football</a>
-        <a href="hockey.html">Hockey</a>
-        <a href="lacrosse.html">Lacrosse</a>
-        <a href="baseball.html">Baseball</a>
-        <a href="design.html">Graphic Design</a>
-        <a href="contact.html" class="active">Contact</a>
-      </div>
+    
+    <button class="menu-toggle" onclick="document.getElementById('desktop-nav').classList.toggle('active')" aria-label="Toggle Navigation">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
 
-      <select class="mobile-nav" onchange="window.location.href=this.value;">
-        <option value="" disabled selected>Menu...</option>
-        <option value="index.html">Home</option>
-        <option value="football.html">Football</option>
-        <option value="hockey.html">Hockey</option>
-        <option value="lacrosse.html">Lacrosse</option>
-        <option value="baseball.html">Baseball</option>
-        <option value="design
+    <nav class="desktop-nav" id="desktop-nav">
+      <a href="index.html">Home</a>
+      <a href="football.html">Football</a>
+      <a href="hockey.html">Hockey</a>
+      <a href="lacrosse.html">Lacrosse</a>
+      <a href="baseball.html">Baseball</a>
+      <a href="design.html">Graphic Design</a>
+      <a href="contact.html" class="active">Contact</a>
+    </nav>
+  </header>
+
+  <main class="contact-container">
+    <p class="bio-text">Sports Photographer & Graphic Designer</p>
+    <div class="contact-card">
+      <a href="mailto:contact@elliottpeckham.com" class="email-link">contact@elliottpeckham.com</a>
+      <div class="social-links">
+        <a href="#" target="_blank">Instagram</a>
+        <a href="#" target="_blank">Twitter</a>
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <p>All images © Elliott Peckham</p>
+  </footer>
+
+</body>
+</html>

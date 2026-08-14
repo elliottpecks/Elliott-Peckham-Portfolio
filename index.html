@@ -8,37 +8,100 @@
 </head>
 <body>
 
-<header class="site-header">
+  <header class="site-header">
     <a href="index.html" class="logo">ELLIOTT PECKHAM</a>
-    <nav class="main-nav">
-      <div class="desktop-nav">
-        <a href="index.html" class="active">Home</a>
-        <a href="football.html">Football</a>
-        <a href="hockey.html">Hockey</a>
-        <a href="lacrosse.html">Lacrosse</a>
-        <a href="baseball.html">Baseball</a>
-        <a href="design.html">Graphic Design</a>
-        <a href="contact.html">Contact</a>
-      </div>
+    
+    <button class="menu-toggle" id="menu-toggle" aria-label="Toggle Navigation">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
 
-      <select class="mobile-nav" onchange="window.location.href=this.value;">
-        <option value="" disabled selected>Menu...</option>
-        <option value="index.html">Home</option>
-        <option value="football.html">Football</option>
-        <option value="hockey.html">Hockey</option>
-        <option value="lacrosse.html">Lacrosse</option>
-        <option value="baseball.html">Baseball</option>
-        <option value="design.html">Graphic Design</option>
-        <option value="contact.html">Contact</option>
-      </select>
+    <nav class="desktop-nav" id="desktop-nav">
+      <a href="index.html" class="active">Home</a>
+      <a href="football.html">Football</a>
+      <a href="hockey.html">Hockey</a>
+      <a href="lacrosse.html">Lacrosse</a>
+      <a href="baseball.html">Baseball</a>
+      <a href="design.html">Graphic Design</a>
+      <a href="contact.html">Contact</a>
     </nav>
   </header>
 
-  <main class="slider-container">
-    <button class="prev-btn" onclick="prevSlide()">&#10094;</button>
+  <main class="slider-container" id="slider-container">
+    <button class="prev-btn" id="prev-btn">&#10094;</button>
+    
+    <div class="slide active"><img src="images/photo1.JPG" alt="Home Shot 1"></div>
+    <div class="slide"><img src="images/photo2.JPG" alt="Home Shot 2"></div>
+    <div class="slide"><img src="images/photo3.JPG" alt="Home Shot 3"></div>
+    <div class="slide"><img src="images/photo4.JPG" alt="Home Shot 4"></div>
+    <div class="slide"><img src="images/photo5.JPG" alt="Home Shot 5"></div>
+    <div class="slide"><img src="images/photo6.JPG" alt="Home Shot 6"></div>
+    <div class="slide"><img src="images/photo7.JPG" alt="Home Shot 7"></div>
+    <div class="slide"><img src="images/photo8.JPG" alt="Home Shot 8"></div>
 
-    <div class="slide active"><img src="images/photo1.JPG" alt="Home Shot 1" onclick="openLightbox(this.src)"></div>
-    <div class="slide"><img src="images/photo2.JPG" alt="Home Shot 2" onclick="openLightbox(this.src)"></div>
-    <div class="slide"><img src="images/photo3.JPG" alt="Home Shot 3" onclick="openLightbox(this.src)"></div>
-    <div class="slide"><img src="images/photo4.JPG" alt="Home Shot 4" onclick="openLightbox(this.src)"></div>
-    <div class="slide"><img src
+    <button class="next-btn" id="next-btn">&#10095;</button>
+  </main>
+
+  <footer class="site-footer">
+    <p>All images © Elliott Peckham</p>
+  </footer>
+
+  <script>
+    // Mobile Navigation Toggle
+    const menuToggle = document.getElementById('menu-toggle');
+    const desktopNav = document.getElementById('desktop-nav');
+
+    menuToggle.addEventListener('click', () => {
+      desktopNav.classList.toggle('active');
+    });
+
+    // Slider Script (Arrows + Swipe)
+    const slides = document.querySelectorAll('.slide');
+    const prevBtn = document.getElementById('prev-btn');
+    const nextBtn = document.getElementById('next-btn');
+    const sliderContainer = document.getElementById('slider-container');
+    let currentIndex = 0;
+
+    function showSlide(index, direction) {
+      slides.forEach((slide, i) => {
+        slide.classList.remove('active', 'exit-left');
+        if (i === index) {
+          slide.classList.add('active');
+        } else if (direction === 'next' && i === (index - 1 + slides.length) % slides.length) {
+          slide.classList.add('exit-left');
+        } else if (direction === 'prev' && i === (index + 1) % slides.length) {
+          slide.classList.add('exit-left');
+        }
+      });
+    }
+
+    function nextSlide() {
+      currentIndex = (currentIndex + 1) % slides.length;
+      showSlide(currentIndex, 'next');
+    }
+
+    function prevSlide() {
+      currentIndex = (currentIndex - 1 + slides.length) % slides.length;
+      showSlide(currentIndex, 'prev');
+    }
+
+    nextBtn.addEventListener('click', nextSlide);
+    prevBtn.addEventListener('click', prevSlide);
+
+    // Touch Swipe Support
+    let startX = 0;
+    let endX = 0;
+
+    sliderContainer.addEventListener('touchstart', (e) => {
+      startX = e.touches[0].clientX;
+    }, { passive: true });
+
+    sliderContainer.addEventListener('touchend', (e) => {
+      endX = e.changedTouches[0].clientX;
+      if (startX - endX > 40) nextSlide(); // Swipe Left
+      if (endX - startX > 40) prevSlide(); // Swipe Right
+    }, { passive: true });
+  </script>
+</body>
+</html>
